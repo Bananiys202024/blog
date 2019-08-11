@@ -1,7 +1,7 @@
 # blog
 
-#<h2>Overwiew</h2>
-#<h6><h6>
+<!---#<h2>Overwiew</h2>-->
+<!---#<h6><h6>-->
 
 <h2>Frameworks and tools</h2>
 
