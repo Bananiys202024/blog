@@ -1,7 +1,7 @@
 # blog
 
 <h2>Overwiew</h2>
-<h6>This is my second web stie. This is a blog-diary.<h6>
+<h6>Simple CRUD app.This is a web-site-diary.<h6>
 
 <h2>Frameworks and tools</h2>
 
