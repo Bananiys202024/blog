@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+     <link rel="stylesheet" href="/css/common.css"/>
+   
+    <title>Blog</title>
+  </head>
+  <body style="height:85%;">
+
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<div th:insert="fragments/TopMenu :: header"></div>
+
+
+<div class="container content-by-center-parent">
+<div class="row">
+<div class="col-md-12">
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">View CV</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Create CV</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Download CV</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+ 
+  <div class="table-responsive-sm">
+<table class="table-sm table-hover table">
+   <th:block th:each="read : ${readDocx.collection}"  >
+	 <tr>
+	 <th scope="row" th:text="${read.key}">...</th>
+	 <td th:text="${read.value}">...</td>
+	 </tr>
+   		</th:block>
+	</th:block>
+
+</table>
+</div> 
+  
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  <div th:insert="fragments/createCV :: createCV"></div>
+  </div>
+  <div class="tab-pane fade text-center mt-5 mb-5" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+  <a class="btn btn-primary" href="download/file/CV.docx" role="button">Download CV</a>
+  
+  </div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+<div th:insert="fragments/BottomMenu :: footer"></div>
+
+
+
+	   </body>
+</html>

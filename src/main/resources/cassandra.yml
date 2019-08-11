@@ -1,0 +1,11 @@
+spring:
+  data:
+    cassandra:
+      cluster-name: Test Cluster
+      keyspace-name: blog
+      port: 9042
+      contact-points:
+        - 127.0.0.1
+      schemaAction: CREATE_IF_NOT_EXISTS
+
+        

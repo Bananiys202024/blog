@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+     <link rel="stylesheet" href="/css/common.css"/>
+   
+    <title>Blog</title>
+  </head>
+  <body  style="height:87%;">
+
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+
+
+<div th:insert="fragments/TopMenu :: header"></div>
+
+
+
+<section class="middle mb-1 content-by-center-parent">  
+<div class="container">
+ <div class="content-by-center-child">
+ 
+<ul class="nav justify-content-center mt-4 mb-4" sec:authorize="hasRole('ROLE_ADMIN')">
+  <li class="nav-item">
+    <a class="nav-link active" href="generate">Generate</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Send Archive</a>
+  </li>
+  
+   <li class="nav-item">
+    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" >Add values</a>
+   </li>
+
+</ul>
+
+<div class="table-responsive-sm">
+<table class="table table-sm table-hover">
+
+<!-- //head -->
+  <thead>
+    <tr>
+   	  <th:block th:each="name : ${NamesOfColumn}">
+      <th scope="col" th:text="${name}"></th>
+      </th:block>
+    </tr>
+  </thead>
+<!--   ... -->
+  
+<!-- body -->
+  <tbody>
+  <th:block th:each="diary : ${Diary}">
+  <tr>
+  <th scope="row" th:text="${#dates.format(diary.getDate(), 'dd-MM-yyyy')}"></th>
+      <td th:class="${diary.isJava()}? 'bg-primary text-center text-white':'  '" th:text="${diary.isJava()} ? '+': '-'"></td>
+      <td th:class="${diary.isSport()}? 'bg-primary text-center text-white':'  '" th:text="${diary.isSport()} ? '+': '-'"></td>
+      <td th:class="${diary.isElectro()} ? 'bg-primary text-center text-white':' '" th:text="${diary.isElectro()} ? '+': '-'" ></td>
+      <td th:class="${diary.isUniversity()} ? 'bg-primary text-center text-white':'  '" th:text="${diary.isUniversity()} ? '+': '-'"></td>
+
+      <td th:class="${diary.isEnglish()} ? 'bg-primary text-center text-white':'  '" th:text="${diary.isEnglish()} ? '+': '-'"></td>
+      <td th:class="${diary.isGerman()} ? 'bg-primary text-center text-white':'  '" th:text="${diary.isGerman()} ? '+': '-'"></td>
+      <td th:class="${diary.isInterviewJava()} ? 'bg-primary text-center text-white':'  '" th:text="${diary.isInterviewJava()} ? '+': '-'"></td>
+      <td th:class="${diary.isInterviewElectro()} ? 'bg-primary text-center text-white':'  '" th:text="${diary.isInterviewElectro()} ? '+': '-'"></td>
+      <td th:class="${diary.isXaXa()} ? 'bg-primary text-center text-white':'  '" th:text="${diary.isXaXa()} ? '+': '-'"></td>
+
+    </tr>
+  </th:block>    
+<!-- ...   -->
+  
+  </tbody>
+</table>
+</div>
+
+</div>
+</div>
+</section>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add work</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="needs-validation" th:action="@{addvalues}"  th:object="${AddValuesToDiary}" th:method="PUT" enctype="multipart/form-data"  novalidate>
+       <div class="form-row">
+      <div class="modal-body">
+<!-- 		I wrote here content of model-->
+	
+	  	<th:block th:each="name : ${NamesOfColumn}">      
+      	<div th:if="${name != '#'}" class="row mt-2 mb-2">
+  
+      	<div class="col-4"><label th:for="${name}" th:text="${name}"></label></div>
+      	<div class="col-8"><input pattern="[0-9]{1,2}" value="0" class="form-control" th:id="${name}" th:name="${name}" type="text" required/>
+      	 <div class="valid-feedback">
+        Looks good!
+     	 </div>
+ 	     <div class="invalid-feedback">
+       Field should be filled by number from two digits
+        </div>
+      </div>
+ 	
+ 		
+      	
+      	</div>
+     	</th:block>
+     		
+      </div>
+  
+      
+<!-- 			... 	-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary " type="submit" >Save changes</button>
+      </div>
+   </form>
+    </div>
+  </div>
+</div>
+<!-- ... -->
+
+<script type="text/javascript" src="/js/BootstrapFormValidation.js"></script>
+
+
+<div th:insert="fragments/BottomMenu :: footer"></div>
+
+
+
+	   </body>
+</html>

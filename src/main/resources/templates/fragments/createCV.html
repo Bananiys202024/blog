@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head></head><body>
+
+
+
+<section th:fragment="createCV">
+
+    <form method="post" th:object="${createCV}" th:action="@{createCV}">
+  <div class="form-row mt-2">   
+    <div class="table-responsive-sm">
+	<table class="table-sm table-hover table">
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Name</span>
+      		    </div>
+      		    <input th:field="${createCV.name}" type="text" class="form-control is-valid" id="validationServerUsername" placeholder="Joch Dias" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Address</span>
+      		    </div>
+      		    <input th:field="${createCV.address}" type="text" class="form-control is-valid" id="validationServerUsername" placeholder="Street 1" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Phone</span>
+      		    </div>
+      		    <input th:field="${createCV.phone}" type="tel" class="form-control is-valid" id="validationServerUsername" placeholder="0975582551" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Email</span>
+      		    </div>
+      		    <input th:field="${createCV.email}" type="email" class="form-control is-valid" id="validationServerUsername" placeholder="jbloggs@gmail.com" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Date of Birth</span>
+      		    </div>
+      		    <input th:field="${createCV.dateofBirth}" type="date" class="form-control is-valid" id="validationServerUsername" placeholder="28/05/14" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Nationality</span>
+      		    </div>
+      		    <input th:field="${createCV.nationality}" type="text" class="form-control is-valid" id="validationServerUsername" placeholder="British" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Skills</span>
+      		    </div>
+      		    <input th:field="${createCV.skills}" type="text" class="form-control is-valid" id="validationServerUsername" placeholder="Spring...etc." required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Programming</span>
+      		    </div>
+      		    <input th:field="${createCV.programming}" type="text" class="form-control is-valid" id="validationServerUsername" placeholder="C, C++" required>
+         	</div>
+          </td>
+  		</tr>
+  		<tr>
+  		  <td>
+  		     <div class="input-group">
+  		     
+				<div class="input-group-prepend">
+       		   	  <span class="input-group-text">Languages</span>
+      		    </div>
+      		    <input th:field="${createCV.languages}" type="text" class="form-control is-valid" id="validationServerUsername" placeholder="English, Ukraine.. etc." required>
+         	</div>
+          </td>
+  		</tr>
+    </table>
+    </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mb-3">Create CV</button>
+    
+    </form>
+
+</section>
+
+
+
+	   </body>
+</html>

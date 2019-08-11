@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+     <link rel="stylesheet" href="/css/common.css"/>
+
+<!--   <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+
+    <title>Blog</title>
+  </head>
+  <body style="height:85%;">
+
+
+<!--         <script src="js/jquery-3.3.1.min.js"></script> -->
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+
+
+<div th:insert="fragments/TopMenu :: header"></div>
+
+
+  
+
+
+<div class="container  content-by-center-parent">
+<div class="">
+<div class="row">
+<div class="col-md-12">
+
+<nav class="mb-3">
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">View goals</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Add new goal</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Gallery</a>
+  </div>
+</nav>
+
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade active show " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  
+  
+
+<div class="card-columns">
+
+
+
+
+
+<div th:each="goals : ${goals.allList}">
+
+<!-- display card -->
+<div class="card" th:classappend="'container'+${goals.getId()}">
+
+	 <img th:src="@{'imageGoal/'+ ${goals.getId()}}" id="align" class=" img-fluid card-img-top rounded" alt=""/>
+	
+<div class="card-body">
+    <h5 class="card-title" th:text="${goals.getTitle()}"></h5>
+    <p class="card-text" th:text="${goals.getDescription()}"></p>
+  </div>
+  
+   <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+    <a th:href="'#collapseExample'+${goals.getId()}" 
+    class="card-link"
+    role="button" aria-expanded="true" th:classappend="'hide'+${goals.getId()}"
+    th:attr = "aria-controls='#collapseExample'+${goals.getId()}"
+    data-toggle="collapse">Edit</a></li>
+    
+    
+    <li class="list-group-item">
+    
+    <form th:action="@{addgallery}" th:method="PUT" enctype="multipart/form-data" id="reachedform">
+    <a href="#" class="card-link" onclick="document.getElementById('reachedform').submit();" >Reached</a>
+    <input style="display:none;" th:value="${goals.id}" id="id" name="id"/>
+    </form>
+    
+    </li>
+ 	
+
+  </ul>
+  
+  <div class="card-footer">
+      <small class="text-muted">Goal setted <span th:text="${goals.getTimeago()}"></span></small>
+    </div>
+
+
+</div>
+
+<!-- //edit card -->
+<!-- <div th:class="'ThatBackEndErrors'+${goals.getId()}"> -->
+<div class="collapse" th:attr = "id='collapseExample'+${goals.getId()}"
+     th:classappend="'ThatBackEndErrors'+${goals.getId()}">
+<!--  th:classappend="'container'+${goals.getId()}" -->
+<div class="card" >
+
+
+<form th:action="@{editgoal}"  th:object="${editGoal}" th:method="PUT" enctype="multipart/form-data" 
+id="editform" class="needs-validation" novalidate>
+  <div class="form-row">
+
+<img th:src="@{'imageGoal/'+ ${goals.getId()}}" id="align" class=" img-fluid card-img-top rounded" alt=""/>
+
+<input type="text" th:value="${goals.createdd}" id="createdd" name="createdd" style="display:none;"/><!--  //date -->
+<input type="text" th:value="${goals.id}" id="id" name="id" style="display:none;"/><!--  //id -->
+
+<div class="card-body">
+
+  <div class="form-group">
+    <input type="text" maxlength="60"  pattern="[A-Za-z0-9][A-Za-z0-9 ]{5,60}" th:value="${goals.title}" id="goal" name="goal" class="card-text form-control" required/><!--  //title -->
+  	<div class="invalid-feedback">
+     Please provide a goal, size should be between 5 and 60
+    </div>
+    <div class="valid-feedback">
+      Looks good
+    </div>
+  </div>
+      <div class="text-danger" th:if="${#fields.hasErrors('goal')}" th:errors="*{goal}"></div>
+  
+  
+  <div class="form-group">
+    <textarea th:text="${goals.description}"rows="5" cols="37"  maxlength="195" id="description" name="description" class="card-text form-control" required></textarea><!-- description -->   
+	 
+	 	      <div class="invalid-feedback ">
+	        Please provide a description, size should be between 1 and 200
+	      </div>
+	    <div class="valid-feedback">
+        Looks good
+      </div>
+          <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+      
+      
+  </div>
+
+
+<div class="input-group mb-3 form-group">
+  <div class="custom-file">
+    <input type="file" class="custom-file-input form-control-file"  
+    id="inputGroupFile01 imageT"  name="imageT" aria-describedby="inputGroupFileAddon01" >
+    <div class="valid-feedback">
+      Looks good
+    </div>
+    
+    <label class="custom-file-label" for="inputGroupFile01">Choose image</label>
+ 	
+  </div>
+</div>
+
+
+</div>
+</div>
+
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><button type="submit" class="btn btn-link">Edit</button></li>
+</ul>
+  
+
+ <div class="card-footer">
+      <small class="text-muted">Goal setted <span th:text="${goals.getTimeago()}"></span></small>
+</div>
+
+
+</form>
+
+
+<!-- th:classappend="'showThat'+${goals.getId()}" -->
+
+</div>
+
+</div>
+
+
+<script th:inline="javascript">
+
+$('.hide'+[[${goals.id}]] ).click(function() {  
+	  $('.container'+[[${goals.id}]] ).hide();
+});
+
+
+$(document).ready(function () {
+
+	if ([[${backendErrors}]] == [[${goals.getId()}]]) {
+		 $('.ThatBackEndErrors'+[[${goals.getId()}]] ).show();
+		 $('.container'+[[${goals.id}]] ).hide();
+	}
+	
+});
+
+</script>
+
+
+</div>
+
+
+
+
+
+</div>
+  
+  
+  
+  
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  
+    
+  <form th:action="@{savegoal}" th:object="${addNewGoal}" th:method="PUT" class="needs-validation"  enctype="multipart/form-data" novalidate>
+  
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Goal</label>
+    <input type="text" pattern="[A-Za-z0-9][A-Za-z0-9 ]{5,60}" 
+    th:field="*{goal}" class="form-control"
+     id="exampleFormControlInput1"  placeholder="goal..."
+      maxlength="60" required>
+      
+      
+  	<div class="invalid-feedback">
+     Please provide a goal, size should be between 5 and 60
+    </div>
+    <div class="valid-feedback">
+      Looks good
+    </div>
+    
+    <div class="text-danger" th:if="${#fields.hasErrors('goal')}" th:errors="*{goal}"></div>
+     
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Describe goal</label>
+    <textarea  maxlength="195" 
+     rows="5" cols="40"
+     class="form-control"  th:field="*{description}"
+     id="exampleFormControlTextarea1" 
+     placeholder="This goal designed for.." required ></textarea>
+             <h6 class="pull-right" id="count_message"></h6>
+     
+	  	      <div class="invalid-feedback ">
+	        Please provide a description, size should be between 1 and 200
+	      </div>
+	    <div class="valid-feedback">
+        Looks good
+      </div>
+    
+   <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Goal can't be empty</div>
+      
+  </div>
+  <div class="form-group">
+  
+  <div class="input-group">
+  <div class="custom-file">
+
+
+        <input type="file"  th:field="*{image}" class="form-control-file custom-file-input"  id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
+  	    <label class="custom-file-label" for="inputGroupFile01">Choose image</label>
+ 	     
+  	    <div class="invalid-feedback">Please provide a image</div>
+    
+        <div class="valid-feedback">Looks good </div>
+     
+        <div class="text-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Image can't be empty</div>
+  
+  </div>
+  </div>
+        
+      
+  </div>
+    <button class="btn btn-primary mb-3" type="submit" th:attr="${limit}? disabled:id='ThatId'">Create goal</button>
+  	<div th:if="${limit}" class="text-danger mb-3">Sorry, but max. goals is 4, so you can't use button</div>
+<!--   	limit -->
+</form>
+
+
+
+  
+  </div>
+  
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+    <div class="card-columns">
+	<div th:each="gallery : ${gallery}">
+	
+	<div class="card">
+
+	<img th:src="@{'imageGallery/'+ ${gallery.getId()}}" id="align" class=" img-fluid card-img-top rounded" alt=""/>
+	
+	<div class="card-body">
+    <h5 class="card-title" th:text="${gallery.getTitle()}"></h5>
+    <p class="card-text" th:text="${gallery.getDescription()}"></p>
+    </div>
+  
+  <div class="card-footer">
+      <small class="text-muted">Goal reached <span th:text="${gallery.getTimeago()}"></span></small>
+  </div>
+
+
+</div>
+	
+	
+	</div>
+	</div>
+	</div>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div th:insert="fragments/BottomMenu :: footer"></div>
+
+<script type="text/javascript" src="/js/BootstrapFormValidation.js"></script>
+
+
+
+	   </body>
+</html>

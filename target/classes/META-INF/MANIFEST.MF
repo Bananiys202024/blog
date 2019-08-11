@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: blog
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: banan
+Implementation-Vendor-Id: com.web.
+Build-Jdk: 1.8.0_222
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/blog
+Created-By: Maven Integration for Eclipse
+Main-Class: com.web.blog.BlogApplication
+

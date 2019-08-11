@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.web.blog.repository.JokesRepositoryIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 25.446 s <<< FAILURE! - in com.web.blog.repository.JokesRepositoryIntegrationTest
+whenUpdatingAndAfterDeleteJoke_thenAvailableOnRetrieval(com.web.blog.repository.JokesRepositoryIntegrationTest)  Time elapsed: 8.381 s  <<< FAILURE!
+java.lang.AssertionError: Values should be different. Actual: 8ac8cd40-a801-11e9-9d44-6dcd06f4e71a
+	at com.web.blog.repository.JokesRepositoryIntegrationTest.whenUpdatingAndAfterDeleteJoke_thenAvailableOnRetrieval(JokesRepositoryIntegrationTest.java:114)
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      
+      
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/common.css"/>
+   
+    <title >Blog</title>
+  </head>
+  <body>
+
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+
+<div th:insert="fragments/TopMenu :: header"></div>
+
+
+
+<section class="middle">  
+ <div class="container">
+
+<div class="row">
+<div class="col-12">
+      <img th:src="@{${'/images/Jokes/Oakbur Quill Co.png'}}"  class="img-fluid" alt=""> 
+  </div>
+</div>
+
+
+
+
+<div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
+<div class="col-12">
+
+<form th:action="@{/createJoke/{path}(path=${currentlyPage})}" th:object="${createJoke}" th:method="PUT" class="needs-validation" novalidate >
+  <div class="mb-3 mt-3">
+    <label for="validationTextarea">Create joke</label>
+    <textarea  onkeyup="countChar(this)" maxlength="400" cols="66" rows="6" th:value="*{textarea}" class="form-control displaytextwithspaces" name="textarea" id="validationTextarea text textarea" placeholder="You can write here some jokes..." required></textarea>
+    <h6 class="mt-2 mb-2" id="charNum"></h6>
+   
+    <div class="text-danger mt-1 mb-1" th:if="${#fields.hasErrors('*')}" th:errors="*{*}"></div>
+    
+    <div class="invalid-feedback">
+      Please enter a message in the textarea.
+    </div>
+    <div class="valid-feedback">
+        Looks good!
+      </div> 
+       
+  </div>
+  
+  <button class="btn btn-primary mt-2" type="submit">Submit</button>
+</form>
+
+</div>
+</div>
+
+
+
+<div class="row mt-4">
+
+
+
+
+<div class="col-9">
+<th:block th:each="joke,iterStat : ${jokes}">
+
+
+<div class="card mt-4 mb-4">
+
+ <div class="d-flex card-header">
+  <div class="mr-auto p-2" th:text="'published '+${joke.getTimeago()}"></div>
+<form  th:id="'sendForm'+${joke.getId()}" th:method="delete" th:action="@{'/jokeDelete/'+${currentlyPage}+'/'+${joke.getId()}}">
+  <div class="p-2 text-primary ml-1" sec:authorize="hasRole('ROLE_ADMIN')"><a  onclick="$(this).closest('form').submit()" href="#">Delete</a></div>
+</form>
+
+ </div>
+
+ 
+  <div class="card-body">
+    <p class="displaytextwithspaces" th:text="${joke.getJokes()}"></p>
+  </div>
+</div>
+
+<!-- <h3>Joke published <span th:text="${joke.getTimeago()}"></span></h3> -->
+<!-- <p th:text="${joke.getJokes()}"></p> -->
+</th:block>
+</div>
+
+<div class="col-3">
+<div class="card mt-4 mb-4" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Random jokes</h5>
+<!--     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    <p class="card-text" th:text="${randomjoke.getJokes()}"></p>
+<!--     <a href="#" class="card-link">Another link</a> -->
+  </div>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center" >
+    <li th:if="${currentlyPage > 1}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${currentlyPage-1}) }">Previous</a></li>
+	
+<!-- 	//main part of shit pagination code, -->
+<!--  		yeah, that's terrible, -->
+<!--   		BUUUUUT it's work -->
+
+	<li th:if="${currentlyPage &gt; 3}" class="page-item"><a class="page-link" th:href="@{/jokes/1 }">1</a></li>
+    <li th:if="${currentlyPage &gt; 4}" class="page-item"><a class="page-link">...</a></li>
+
+	<!-- 	//middle pagination-->
+	<th:block th:each="page, iter : ${pagination}">
+    <li th:if="${page == currentlyPage AND page != iter.size}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${page}) }" th:text="${page}"></a></li>
+    <li th:if="${(currentlyPage+1 == page) AND page != iter.size}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${page}) }" th:text="${page}"></a></li>
+    <li th:if="${(currentlyPage-1 == page)  AND page != iter.size}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${page}) }" th:text="${page}"></a></li>
+    <li th:if="${(currentlyPage-2 == page)  AND page != iter.size}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${page}) }" th:text="${page}"></a></li>
+    <li th:if="${(currentlyPage+2 == page)  AND page != iter.size}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${page}) }" th:text="${page}"></a></li> 
+    </th:block>
+	<!--     ... -->
+    
+    <li th:if="${currentlyPage+2  &lt;  maxPage}" class="page-item"><a class="page-link">...</a></li>
+ 
+    <th:block th:each="page, iter : ${pagination}">
+    <li th:if="${iter.index &gt; iter.size - 2}" class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path=${page}) }" th:text="${page}"></a></li>
+    </th:block>
+    
+<!--     .... -->
+<!--     .... -->
+<!--     .... -->
+    
+     
+     
+    <li th:if="${currentlyPage < maxPage}"class="page-item"><a class="page-link" th:href="@{/jokes/{path}(path='next'+${currentlyPage}) }" >Next</a></li>
+  </ul>
+</nav>
+
+
+</div>
+</section>
+
+
+<div class="pt-2" th:insert="fragments/BottomMenu :: footer"></div>
+<script type="text/javascript" src="/js/BootstrapFormValidation.js"></script>
+<script type="text/javascript" src="/js/countCharactersOfTextArea.js"></script>
+
+
+	   </body>
+</html>

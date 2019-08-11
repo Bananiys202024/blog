@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      
+<head></head><body>
+
+
+<section class="top mb-3" th:fragment="header">
+  <nav class="navbar  navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand mr-auto" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img th:src="@{${'/images/TopSideMenu/Hamburger.png'}}" width="30" height="30" alt="">
+  </a>
+  
+  <a class="navbar-brand" href="/login">
+    <img th:src="@{${'/images/TopSideMenu/account.png'}}" width="30" height="30" alt=""/>
+ 
+  <span sec:authorize="isAuthenticated()">[[${#httpServletRequest.remoteUser}]]</span>
+  <span sec:authorize="isAnonymous()">Account</span>
+
+  </a>
+
+<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button type="submit"  class="btn btn-outline-dark">Sign Out</button>
+</form>
+
+
+</nav>
+  
+<!--  <span th:text="${currentlyPage}"></span> -->
+<div class="collapse" id="collapseExample">
+    <div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" th:href="@{/}">Jokes</a>
+      <a class="nav-link" th:href="@{/diary}">Diary</a>
+      <a class="nav-link" th:href="@{/editOwnCV}">CV</a>
+      <a class="nav-link" th:href="@{/goals}">Goals</a>
+      <a class="nav-link" th:href="@{/notes/1}" sec:authorize="hasRole('ROLE_ADMIN')">Notes</a>
+   </div>
+</div>
+</section>  '
+
+
+
+</body></html>
