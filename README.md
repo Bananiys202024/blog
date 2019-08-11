@@ -28,3 +28,14 @@
 </h6>
 
 
+<h2>Username, password and role for sign In</h2>
+
+<h6>
+    <ol>
+        <li>Admin:123</li>
+        <li>User:1234</li>
+        <li>Banan:1234</li>
+        <li>nonBanan:1234</li>
+   </ol>
+</h6>
+
