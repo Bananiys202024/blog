@@ -33,9 +33,9 @@
 <h6>
     <ol>
         <li>Admin: 123 :admin</li>
-        <li>User: 1234 :user</li>
+        <li>User: 123 :user</li>
         <li>Banan: 1234 :user</li>
-        <li>nonBanan: 1234 :user</li>
+        <li>nonBanan: 12345 :user</li>
    </ol>
 </h6>
 
