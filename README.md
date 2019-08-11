@@ -13,7 +13,7 @@
     Web Server: Tomcat<br>
     Build Tool: Maven<br>
     Linux： Arch Linux<br>
-    Other: Log4j, Twilio, junit, lombok<br>
+    Other: Log4j, junit, lombok<br>
 </h6>
 
 
