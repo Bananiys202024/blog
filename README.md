@@ -26,3 +26,5 @@
      <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li>     
    </ol>
 </h6>
+
+
