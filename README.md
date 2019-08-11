@@ -21,13 +21,8 @@
 
 <h6>
     <ol>
-        <li>Download libraries
-        https://github.com/Bananiys202024/libraries and configure
+        <li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path"
         </li>
-     <li>For sign in as Admin:<br>
-       You need uncomment method generate_admin_password in class UserServiceImpl 
-         and set username and password in variables on lines 65, 66 in class UserServiceImpl
-       ,then uncomment 37 line in class UserServiceImpl, after
-        you need registre any user, then you can sign In as Admin</li>     
+     <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li>     
    </ol>
 </h6>
