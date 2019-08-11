@@ -1,7 +1,7 @@
 # blog
 
-<h2>Overwiew</h2>
-<h6>Simple and beautiful CRUD app. This is a web-site-diary.<h6>
+#<h2>Overwiew</h2>
+#<h6><h6>
 
 <h2>Frameworks and tools</h2>
 
