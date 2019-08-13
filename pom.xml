@@ -10,7 +10,9 @@
 	</parent>
 	<groupId>com.web.</groupId>
 	<artifactId>blog</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>blog</name>
 	<description>Spring Boot blog</description>
 
