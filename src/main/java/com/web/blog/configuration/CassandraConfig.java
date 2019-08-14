@@ -1,5 +1,6 @@
 package com.web.blog.configuration;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.core.CassandraTemplate;
+import org.springframework.data.cassandra.core.convert.MappingCassandraConverter;
 import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingContext;
@@ -29,38 +31,56 @@ import org.springframework.core.env.Environment;
 
 
 @Configuration
-@PropertySource(value = { "classpath:cassandra.yml" })
 @ConfigurationProperties("spring.data.cassandra")
 @EnableCassandraRepositories
 public class CassandraConfig extends AbstractCassandraConfiguration {
 
 	private static final Logger logger = LogManager.getLogger(CassandraConfig.class);
 	
-    @Value("${keyspacename}")
-    protected String keyspaceName;
+	private final String contactPoints;
 
+	private final int port;
+
+	private final String basePackages;
+	
+    private final String keyspaceName;
+
+    
+    CassandraConfig(
+    	      @Value("${cassandra.keyspace}") String keyspace,
+    	      @Value("${cassandra.port}") int port,
+    	      @Value("${cassandra.contactpoints}") String contactPoints,
+    	      @Value("${cassandra.basepackages}") String basePackages) {
+    	    this.keyspaceName = keyspace;
+    	    this.basePackages = basePackages;
+    	    this.port = port;
+    	    this.contactPoints=contactPoints;
+    }
+
+    @Override
+    protected String getContactPoints() {
+      return contactPoints;
+    }
+
+    @Override
+    protected int getPort() {
+      return port;
+    }
+ 
     @Override
     protected String getKeyspaceName() {
         return this.keyspaceName;
     }
     
     @Override
-    protected List getKeyspaceCreations() {
-        return Collections.singletonList(CreateKeyspaceSpecification
-                .createKeyspace(keyspaceName).ifNotExists()
-                .with(KeyspaceOption.DURABLE_WRITES, true)
-                .withSimpleReplication());
+    protected List<String> getStartupScripts() {
+      final String script =
+          "CREATE KEYSPACE IF NOT EXISTS "
+              + keyspaceName
+              + " WITH durable_writes = true"
+              + " AND replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};";
+      return Arrays.asList(script);
     }
-
-    @Override
-    protected List getStartupScripts() {
-        return Collections.singletonList("CREATE KEYSPACE IF NOT EXISTS "
-                + keyspaceName + " WITH replication = {"
-                + " 'class': 'SimpleStrategy', "
-                + " 'replication_factor': '3' " + "};");
-
-    }
-    
     
     @Override 
     protected boolean getMetricsEnabled() { return false; }
@@ -68,17 +88,22 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     
     @Override
     public String[] getEntityBasePackages() {
-        return new String[]{"com.web.blog.entity"};
+        return new String[]{this.basePackages};
     }
     
     @Override
     public SchemaAction getSchemaAction() {
-        return SchemaAction.RECREATE_DROP_UNUSED;
+        return SchemaAction.RECREATE;
     }
 
     @Bean
     public CassandraOperations cassandraOperations() throws Exception {
         return new CassandraTemplate(session().getObject());
+    }
+    
+    @Override
+    protected List<String> getShutdownScripts() {
+      return Arrays.asList("DROP KEYSPACE IF EXISTS " + keyspaceName + ";");
     }
     
 }
