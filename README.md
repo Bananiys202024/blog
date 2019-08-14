@@ -23,7 +23,9 @@
     <ol>
         <li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path"
         </li>
-     <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li>     
+     <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li> 
+        <li>If you can't start project then execute command "Drop keyspace blog;" in cassandra </li> 
+        <li>If you can't start project then change schemaAction.RECREATE to another recreate RECREATE_.. in class CassandraConfiguration in package "com.web.blog.configuration" </li> 
    </ol>
 </h6>
 
