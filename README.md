@@ -42,3 +42,41 @@
    </ol>
 </h6>
 
+
+<h2>How use cassandra</h2>
+
+Open cassandra in terminal
+            
+    cqlsh
+    
+Show all exist databases
+
+    DESCRIBE keyspaces;
+    
+Use database "blog"
+    
+    use blog
+  
+Show all tables
+    
+    DESCRIBE tables;
+    
+Select all from table "jokes"
+    
+    SELECT * FROm jokes;
+
+Drop table
+    
+    DROP TABLE jokes;
+    
+Drop database
+
+    drop keyspace blog;
+    
+To clear table "goals"
+
+    TRUNCATE goals;
+    
+
+
+    
