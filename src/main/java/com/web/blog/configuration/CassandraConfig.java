@@ -93,7 +93,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     
     @Override
     public SchemaAction getSchemaAction() {
-        return SchemaAction.RECREATE;
+        return SchemaAction.RECREATE_DROP_UNUSED;
     }
 
     @Bean
