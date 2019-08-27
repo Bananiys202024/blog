@@ -79,8 +79,5 @@ To clear table "goals"
     
 <h2>Screenshots</h2>
 
-![1](https://user-images.githubusercontent.com/33463342/63746383-3caa0080-c894-11e9-8e1b-ca6d19837f7b.png)
-![2](https://user-images.githubusercontent.com/33463342/63746386-3caa0080-c894-11e9-82ec-f381038e4ec0.png)
-![3](https://user-images.githubusercontent.com/33463342/63746387-3caa0080-c894-11e9-853c-bb47ce1b8a8c.png)
-
+![] (screenshots/1.png)
 
