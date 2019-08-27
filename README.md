@@ -79,5 +79,6 @@ To clear table "goals"
     
 <h2>Screenshots</h2>
 
-![] (screenshots/1.png)
-
+<img src="screenshots/1.png">
+<img src="screenshots/2png">
+<img src="screenshots/3.png">
