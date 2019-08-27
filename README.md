@@ -78,9 +78,9 @@ To clear table "goals"
     TRUNCATE goals;
     
 <h2>Screenshots</h2>
-![1](https://user-images.githubusercontent.com/33463342/63746283-ffde0980-c893-11e9-9c5c-7dfc0d56b0a7.png)
-![2](https://user-images.githubusercontent.com/33463342/63746284-ffde0980-c893-11e9-84d1-9b8e6a3a5165.png)
-![3](https://user-images.githubusercontent.com/33463342/63746285-ffde0980-c893-11e9-979e-643cd9555ce9.png)
+
+![1](https://user-images.githubusercontent.com/33463342/63746383-3caa0080-c894-11e9-8e1b-ca6d19837f7b.png)
+![2](https://user-images.githubusercontent.com/33463342/63746386-3caa0080-c894-11e9-82ec-f381038e4ec0.png)
+![3](https://user-images.githubusercontent.com/33463342/63746387-3caa0080-c894-11e9-853c-bb47ce1b8a8c.png)
 
 
-    
