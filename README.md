@@ -3,6 +3,13 @@
 <!---#<h2>Overwiew</h2>-->
 <!---#<h6><h6>-->
 
+    
+<h2>Screenshots</h2>
+<kbd><img src="screenshots/1.png"></kbd>
+<kbd><img src="screenshots/3.png"></kbd>
+<kbd><img src="screenshots/2.png"></kbd>
+
+
 <h2>Frameworks and tools</h2>
 
 <h6>
@@ -76,9 +83,4 @@ Drop database
 To clear table "goals"
 
     TRUNCATE goals;
-    
-<h2>Screenshots</h2>
-<kbd><img src="screenshots/1.png"></kbd>
-<kbd><img src="screenshots/3.png"></kbd>
-<kbd><img src="screenshots/2.png"></kbd>
 
