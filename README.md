@@ -17,7 +17,7 @@
     Backend: Spring-boot, Spring, Spring-data, Spring Security, apache POI, Hibernate<br>
     Frontend: Bootstrap, thymeleaf<br>
     Database: cassandra<br>
-    Web Server: Tomcat<br>
+    Web Server: Tomcat7<br>
     Build Tool: Maven<br>
     Linux： Arch Linux<br>
     Other: Log4j, junit, lombok<br>
