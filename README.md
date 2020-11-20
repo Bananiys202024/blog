@@ -28,6 +28,14 @@
 
 <h6>
     <ol>
+        <li>
+            force update of snapshots updates
+            
+            mvn clean install -U
+            
+
+</li>
+
         <li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path"
         </li>
      <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li> 
