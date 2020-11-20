@@ -35,8 +35,7 @@
            
 </li>
 
-<li> May be you will be need go to file ".classpath" and  fix paths to libraries,because it is local paths of computer 
-        <li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path"
+<li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path"
         </li>
      <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li> 
         <li>If you can't start project then execute command "Drop keyspace blog;" in cassandra </li> 
