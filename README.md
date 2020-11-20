@@ -35,10 +35,10 @@
            
 </li>
 
-<li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path"
+<li>Add libraries to build path. In Eclipse: right click by folder "library" and choose "Add to Build Path".
         </li>
         
-<li> “The selection cannot be run on any server” you need go to project facets and mark version for Dynamic Web Module, on date 21.10.2020 version must be 3.0</li>        
+<li> “The selection cannot be run on any server” you need go to project facets and mark version for Dynamic Web Module, on date 21.10.2020 version must be 3.0. may be you will been unmark Cloud Foundry Standalone in Project Facets and use tomcat7</li>        
      <li>If you can't start project from of weakly computer you can delete package "com.web.blog.Initializing" </li> 
         <li>If you can't start project then execute command "Drop keyspace blog;" in cassandra </li> 
         <li>If you can't start project then change schemaAction.RECREATE to another recreate RECREATE_.. in class CassandraConfiguration in package "com.web.blog.configuration" </li> 
