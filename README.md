@@ -61,6 +61,10 @@
 
 <h2>How use cassandra</h2>
 
+Start cassandra db on arch linux
+
+    systemctl start cassandra
+
 Open cassandra in terminal
             
     cqlsh
