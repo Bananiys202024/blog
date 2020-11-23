@@ -23,6 +23,22 @@
     Other: Log4j, junit, lombok<br>
 </h6>
 
+<h2>Start project with maven</h2>
+
+Generate archive
+
+        mvn install
+
+Start server
+
+        java -jar target/blog-0.0.1-SNAPSHOT.jar
+        
+Go to web site        
+        
+        http://localhost:8082/
+        
+port of url can be different. You need check server.port in file src/main/resources/application.properties
+
 
 <h2>Tuning project...</h2>
 
