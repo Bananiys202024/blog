@@ -134,4 +134,17 @@ Kill port
     
 Where is 11778 is PID of process    
 
+<h2> Get Ip of laptop in arch linux</h2>
+
+1 way
+
+    ip addr show wlp2s0
+
+2 way
+
+    ip addr show
+
+3 way
+
+    ip route list 
 
