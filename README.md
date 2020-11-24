@@ -117,3 +117,21 @@ To clear table "goals"
 
     TRUNCATE goals;
 
+
+<h2> Address already in use on arch linux  </h2>
+
+Looking for port
+
+    sudo netstat -tulpn | grep :9042
+
+Looking for port
+
+    sudo lsof -i :9042
+
+Kill port
+
+    sudo kill -9 11778
+    
+Where is 11778 is PID of process    
+
+
