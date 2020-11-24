@@ -25,6 +25,10 @@
 
 <h2>Start project with maven</h2>
 
+Start cassandra database on arch linux
+    
+        sudo cassandra -R
+
 Generate archive
 
         mvn install
